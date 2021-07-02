@@ -12,6 +12,8 @@ import java.util.Scanner;
                 char play = scanner.next().charAt(0);
 
                 //while loop for allowing to play
+                /*test*/
+                
                 while (play == 'p') {
                     System.out.println("Please enter Player's 1 name: ");
                     String player1 = scanner.nextLine();
