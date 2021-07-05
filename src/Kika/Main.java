@@ -1,5 +1,6 @@
 package Kika;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -11,55 +12,57 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        char again = 'n';
 
-        System.out.println("Do you want to play or see results? p/r");
-        char play = scanner.next().charAt(0);
-        scanner.nextLine();
-
-
-        while (play == 'p') {
-            System.out.println("Please enter Player's 1 name: ");
-            String player1 = scanner.nextLine();
-
-            System.out.println("Please enter Player's 2 name: ");
-            String player2 = scanner.nextLine();
+        do {
+            System.out.println("Do you want to play or see results? p/r");
+            char play = scanner.next().charAt(0);
+            scanner.nextLine();
 
 
-            // Designing a game board
+            if (play == 'p') {
+                System.out.println("Please enter Player's 1 name: ");
+                String player1 = scanner.nextLine();
 
-            char[][] board = {{'-', '-', '-', '-', '-', '-', '-'},
-                    {'|', ' ', '|', ' ', '|', ' ', '|'},
-                    {'|', '-', '+', '-', '+', '-', '|'},
-                    {'|', ' ', '|', ' ', '|', ' ', '|'},
-                    {'|', '-', '+', '-', '+', '-', '|'},
-                    {'|', ' ', '|', ' ', '|', ' ', '|'},
-                    {'-', '-', '-', '-', '-', '-', '-'}};
+                System.out.println("Please enter Player's 2 name: ");
+                String player2 = scanner.nextLine();
 
 
-            boolean gameEnded = false;
+                // Designing a game board
 
-            printBoard(board);
+                char[][] board = {{'-', '-', '-', '-', '-', '-', '-'},
+                        {'|', ' ', '|', ' ', '|', ' ', '|'},
+                        {'|', '-', '+', '-', '+', '-', '|'},
+                        {'|', ' ', '|', ' ', '|', ' ', '|'},
+                        {'|', '-', '+', '-', '+', '-', '|'},
+                        {'|', ' ', '|', ' ', '|', ' ', '|'},
+                        {'-', '-', '-', '-', '-', '-', '-'}};
 
-            while (!gameEnded) {
 
-                // asking Player 1 for entering X
+                boolean gameEnded = false;
 
-                System.out.println("Player 1, please enter 1-9 to place your X: ");
-                int playerXO = scanner.nextInt();
-
-                // check if the move is valid
-
-                while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
-                    System.out.println("This is invalid move! Please try again");
-                    playerXO = scanner.nextInt();
-                }
-
-                placing(board, playerXO, 1);
                 printBoard(board);
 
-                // checking for the Game result
+                while (!gameEnded) {
 
-                if (checkResult(board) == 'X') {
+                    // asking Player 1 for entering X
+
+                    System.out.println("Player 1, please enter 1-9 to place your X: ");
+                    int playerXO = scanner.nextInt();
+
+                    // check if the move is valid
+
+                    while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
+                        System.out.println("This is invalid move! Please try again");
+                        playerXO = scanner.nextInt();
+                    }
+
+                    placing(board, playerXO, 1);
+                    printBoard(board);
+
+                    // checking for the Game result
+                    gameEnded = checkIfWon(board);
+/*                if (checkResult(board) == 'X') {
                     System.out.println("Player 1 has won!");
                     gameEnded = true;
 
@@ -72,28 +75,28 @@ public class Main {
                         System.out.println("It's a tie!");
                         gameEnded = true;
                     }
-                }
+                }*/
 
+                    // asking Player 2 for entering O
 
-                // asking Player 2 for entering O
-
-                if (!gameEnded) {
-                    System.out.println("Player 2, please enter 1-9 to place your O: ");
-                    playerXO = scanner.nextInt();
-
-                    // check if the move is valid
-
-                    while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
-                        System.out.println("This is invalid move! Please try again");
+                    if (!gameEnded) {
+                        System.out.println("Player 2, please enter 1-9 to place your O: ");
                         playerXO = scanner.nextInt();
-                    }
 
-                    placing(board, playerXO, 2);
-                    printBoard(board);
+                        // check if the move is valid
 
-                    // check for the game result - winner or tie
+                        while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
+                            System.out.println("This is invalid move! Please try again");
+                            playerXO = scanner.nextInt();
+                        }
 
-                    if (checkResult(board) == 'X') {
+                        placing(board, playerXO, 2);
+                        printBoard(board);
+
+                        // check for the game result - winner or tie
+                        gameEnded = checkIfWon(board);
+
+                       /*                    if (checkResult(board) == 'X') {
                         System.out.println("Player 1 has won!");
                         gameEnded = true;
 
@@ -104,16 +107,19 @@ public class Main {
                     } else if (outOfMoves(board)) {
                         System.out.println("It's a tie!");
                         gameEnded = true;
+                    }*/
                     }
-
                 }
-
             }
+            if (play == 'r') {
+                System.out.println("RESULTS");
+            }
+            System.out.println("Do you want to do something more? y/n");
+            again = scanner.next().charAt(0);
+            scanner.nextLine();
+        } while (again == 'y');
+
         }
-    }
-
-
-
 
 // method for printing out the game board
 
@@ -172,7 +178,21 @@ public class Main {
         }
     }
 
-
+    public static boolean checkIfWon (char [][] board){
+        if (checkResult(board) == 'X') {
+            System.out.println("Player 1 has won!");
+            return true;
+        } else if (checkResult(board) == '0') {
+            System.out.println("Player 2 has won!");
+            return true;
+            //If neither player has won, check to see if there has been a tie (if the board is full)
+        } else if (outOfMoves(board)) {
+            System.out.println("It's a tie!");
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //Method to check if won
 
