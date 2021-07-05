@@ -57,7 +57,7 @@ public class Database {
                 System.out.println("Goodbye!");
             }
 
-            public static void readResults () {
+            public void readResults () {
                 Connection conn = null;
                 Statement stmt = null;
                 try {

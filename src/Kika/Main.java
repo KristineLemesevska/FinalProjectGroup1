@@ -6,12 +6,13 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Main {
-
+    Database db = new Database();
     static ArrayList <Integer> playerMoves = new ArrayList <Integer> ();
 
                 Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
 
 
         Scanner scanner = new Scanner(System.in);
