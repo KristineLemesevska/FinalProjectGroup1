@@ -6,6 +6,7 @@ import java.util.Scanner;
 
             public static void main(String[] args) {
 
+
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.println("Do you want to play or see results? p/r");
