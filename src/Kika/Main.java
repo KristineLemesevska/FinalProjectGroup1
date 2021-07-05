@@ -9,12 +9,10 @@ public class Main {
 
     static ArrayList <Integer> playerMoves = new ArrayList <Integer> ();
 
-<<<<<<< HEAD
-
                 Scanner scanner = new Scanner(System.in);
-=======
+
     public static void main(String[] args) {
->>>>>>> 78af02189a10f214ada5a59f49b44753b4a296df
+
 
         Scanner scanner = new Scanner(System.in);
         char again = 'n';
