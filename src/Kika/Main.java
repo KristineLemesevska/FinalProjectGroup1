@@ -1,6 +1,6 @@
 package Kika;
 
-import java.sql.SQLOutput;
+import java.sql.*;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ public class Main {
     static ArrayList <Integer> playerMoves = new ArrayList <Integer> ();
 
     public static void main(String[] args) {
+
+        Database db = new Database();
 
         Scanner scanner = new Scanner(System.in);
         char again = 'n';
@@ -61,7 +63,7 @@ public class Main {
                     printBoard(board);
 
                     // checking for the Game result
-                    gameEnded = checkIfWon(board);
+                    gameEnded = checkIfWon(board, player1, player2);
 /*                if (checkResult(board) == 'X') {
                     System.out.println("Player 1 has won!");
                     gameEnded = true;
@@ -94,7 +96,7 @@ public class Main {
                         printBoard(board);
 
                         // check for the game result - winner or tie
-                        gameEnded = checkIfWon(board);
+                        gameEnded = checkIfWon(board, player1, player2);
 
                        /*                    if (checkResult(board) == 'X') {
                         System.out.println("Player 1 has won!");
@@ -112,7 +114,7 @@ public class Main {
                 }
             }
             if (play == 'r') {
-                System.out.println("RESULTS");
+                db.readResults();
             }
             System.out.println("Do you want to do something more? y/n");
             again = scanner.next().charAt(0);
@@ -178,23 +180,29 @@ public class Main {
         }
     }
 
-    public static boolean checkIfWon (char [][] board){
+    // methods to check results and winners
+
+    public static boolean checkIfWon (char [][] board, String player1, String player2 ){
+        Database db = new Database();
+
         if (checkResult(board) == 'X') {
             System.out.println("Player 1 has won!");
+           db.insertResult (player1, player2, player1);
             return true;
+
         } else if (checkResult(board) == '0') {
             System.out.println("Player 2 has won!");
+             db.insertResult (player1, player2, player2);
             return true;
             //If neither player has won, check to see if there has been a tie (if the board is full)
         } else if (outOfMoves(board)) {
             System.out.println("It's a tie!");
+             db.insertResult ( player1,  player2, "TIE");
             return true;
         } else {
             return false;
         }
     }
-
-    //Method to check if won
 
     public static char checkResult ( char[][] board){
 
