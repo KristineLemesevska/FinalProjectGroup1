@@ -13,11 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-<<<<<<< HEAD
-        Database db = new Database();
-=======
 
->>>>>>> 6ee17135ec1702aba83260c56314b19b5bb1d258
+        Database db = new Database();
+
 
         Scanner scanner = new Scanner(System.in);
         char again = 'n';
