@@ -54,8 +54,12 @@ public class Main {
 
                     // check if the move is valid
 
+                    while (playerXO < 0 || playerXO > 9) {
+                        System.out.println("Invalid input! Please enter 1-9: ");
+                        playerXO = scanner.nextInt();
+                    }
                     while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
-                        System.out.println("This is invalid move! Please try again");
+                        System.out.println("Your move is taken! Please try again");
                         playerXO = scanner.nextInt();
                     }
 
@@ -87,8 +91,12 @@ public class Main {
 
                         // check if the move is valid
 
+                        while (playerXO < 0 || playerXO > 9) {
+                            System.out.println("Your move is out of the bound! Please enter 1-9: ");
+                            playerXO = scanner.nextInt();
+                        }
                         while (playerXO < 0 || playerXO > 9 || playerMoves.contains(playerXO)) {
-                            System.out.println("This is invalid move! Please try again");
+                            System.out.println("Your move is taken! Please try again");
                             playerXO = scanner.nextInt();
                         }
 
@@ -116,6 +124,7 @@ public class Main {
             if (play == 'r') {
                 db.readResults();
             }
+            playerMoves.clear();
             System.out.println("Do you want to do something more? y/n");
             again = scanner.next().charAt(0);
             scanner.nextLine();
