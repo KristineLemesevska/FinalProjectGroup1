@@ -77,7 +77,11 @@ public class Database {
                     // STEP 4: Extract data from result set
                     while(rs.next()) {
                         // Retrieve by column name
+<<<<<<< HEAD
                         int id  = rs.getInt("gameid");
+=======
+                        int id  = rs.getInt("id");
+>>>>>>> 6ee17135ec1702aba83260c56314b19b5bb1d258
                         String player1 = rs.getString("player1");
                         String player2= rs.getString("player2");
                         String winner = rs.getString("winner");
@@ -85,7 +89,11 @@ public class Database {
                         // Display values
                         System.out.print("ID: " + id);
                         System.out.print(", Player1: " + player1);
+<<<<<<< HEAD
                         System.out.print(", Player2: " + player2);
+=======
+                        System.out.println(", Player2: " + player2);
+>>>>>>> 6ee17135ec1702aba83260c56314b19b5bb1d258
                         System.out.println( ", Winner: " +  winner);
 
                     }
@@ -110,6 +118,13 @@ public class Database {
                     } // end finally try
                 } // end try
                 System.out.println();
+<<<<<<< HEAD
                 //System.out.println("Goodbye!");
             }
 }
+=======
+                System.out.println("Goodbye!");
+            }
+}
+
+>>>>>>> 6ee17135ec1702aba83260c56314b19b5bb1d258
